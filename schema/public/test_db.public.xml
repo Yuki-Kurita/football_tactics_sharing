@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<database name="test_db" schema="public" type="PostgreSQL - 10.14">
+   <sequences>
+      <sequence increment="1" name="menu_menu_id_seq" startValue="1"/>
+      <sequence increment="1" name="tag_tag_id_seq" startValue="1"/>
+      <sequence increment="1" name="users_user_id_seq" startValue="1"/>
+   </sequences>
+   <tables>
+      <table name="menu" numRows="0" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('menu_menu_id_seq'::regclass)" digits="0" id="0" name="menu_id" nullable="false" remarks="" size="10" type="serial" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="training_name" nullable="false" remarks="" size="256" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="purpose" nullable="false" remarks="" size="512" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="organize" nullable="false" remarks="" size="1028" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="tag_id" nullable="false" remarks="" size="10" type="int4" typeCode="4">
+            <parent column="tag_id" foreignKey="menu_tag_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="tag"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="5" name="user_id" nullable="false" remarks="" size="10" type="int4" typeCode="4">
+            <parent column="user_id" foreignKey="menu_user_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="users"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="6" name="figure_url" nullable="true" remarks="" size="256" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="7" name="video_url" nullable="true" remarks="" size="256" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="6" id="8" name="created_at" nullable="true" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <primaryKey column="menu_id" sequenceNumberInPK="1"/>
+         <index name="menu_pkey" unique="true">
+            <column ascending="true" name="menu_id"/>
+         </index>
+      </table>
+      <table name="tag" numRows="0" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('tag_tag_id_seq'::regclass)" digits="0" id="0" name="tag_id" nullable="false" remarks="" size="10" type="serial" typeCode="4">
+            <child column="tag_id" foreignKey="menu_tag_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="menu"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="tag_name" nullable="false" remarks="" size="64" type="varchar" typeCode="12"/>
+         <primaryKey column="tag_id" sequenceNumberInPK="1"/>
+         <index name="tag_pkey" unique="true">
+            <column ascending="true" name="tag_id"/>
+         </index>
+      </table>
+      <table name="users" numRows="0" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('users_user_id_seq'::regclass)" digits="0" id="0" name="user_id" nullable="false" remarks="" size="10" type="serial" typeCode="4">
+            <child column="user_id" foreignKey="menu_user_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="menu"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="fire_id" nullable="false" remarks="" size="32" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="last_name" nullable="false" remarks="" size="8" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="first_name" nullable="false" remarks="" size="8" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="birthday" nullable="false" remarks="" size="13" type="date" typeCode="91"/>
+         <primaryKey column="user_id" sequenceNumberInPK="1"/>
+         <index name="users_pkey" unique="true">
+            <column ascending="true" name="user_id"/>
+         </index>
+      </table>
+   </tables>
+</database>
