@@ -6,6 +6,17 @@
       <sequence increment="1" name="users_user_id_seq" startValue="1"/>
    </sequences>
    <tables>
+      <table name="firebase" numRows="0" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="null" digits="0" id="0" name="fire_id" nullable="false" remarks="" size="32" type="varchar" typeCode="12">
+            <child column="fire_id" foreignKey="users_fire_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="users"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="email" nullable="false" remarks="" size="128" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="password" nullable="false" remarks="" size="128" type="varchar" typeCode="12"/>
+         <primaryKey column="fire_id" sequenceNumberInPK="1"/>
+         <index name="firebase_pkey" unique="true">
+            <column ascending="true" name="fire_id"/>
+         </index>
+      </table>
       <table name="menu" numRows="0" remarks="" schema="public" type="TABLE">
          <column autoUpdated="true" defaultValue="nextval('menu_menu_id_seq'::regclass)" digits="0" id="0" name="menu_id" nullable="false" remarks="" size="10" type="serial" typeCode="4"/>
          <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="training_name" nullable="false" remarks="" size="256" type="varchar" typeCode="12"/>
@@ -39,7 +50,9 @@
          <column autoUpdated="true" defaultValue="nextval('users_user_id_seq'::regclass)" digits="0" id="0" name="user_id" nullable="false" remarks="" size="10" type="serial" typeCode="4">
             <child column="user_id" foreignKey="menu_user_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="menu"/>
          </column>
-         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="fire_id" nullable="false" remarks="" size="32" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="fire_id" nullable="false" remarks="" size="32" type="varchar" typeCode="12">
+            <parent column="fire_id" foreignKey="users_fire_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="firebase"/>
+         </column>
          <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="last_name" nullable="false" remarks="" size="8" type="varchar" typeCode="12"/>
          <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="first_name" nullable="false" remarks="" size="8" type="varchar" typeCode="12"/>
          <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="birthday" nullable="false" remarks="" size="13" type="date" typeCode="91"/>
