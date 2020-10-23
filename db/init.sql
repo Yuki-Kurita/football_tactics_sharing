@@ -1,8 +1,18 @@
 SET client_encoding = 'UTF8';
 
+DROP TABLE IF EXISTS firebase;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS tag;
 DROP TABLE IF EXISTS menu;
+
+-- FIREBASE_AUTHENTIFICATION
+-- イメージ用に作るだけで本番環境では用意しない
+CREATE TABLE IF NOT EXISTS firebase (
+  fire_id VARCHAR(32) NOT NULL,
+  email VARCHAR(128) NOT NULL,
+  password VARCHAR(128) NOT NULL,
+  PRIMARY KEY(fire_id)
+);
 
 CREATE TABLE IF NOT EXISTS users (
   user_id SERIAL NOT NULL,
@@ -10,6 +20,7 @@ CREATE TABLE IF NOT EXISTS users (
   last_name VARCHAR(8) NOT NULL,
   first_name VARCHAR(8) NOT NULL,
   birthday DATE NOT NULL,
+  FOREIGN KEY (fire_id) REFERENCES firebase(fire_id) ON UPDATE CASCADE,
   PRIMARY KEY (user_id)
 );
 
